@@ -1,7 +1,8 @@
 #!/bin/bash
 echo "\$* 와 \$@"
-echo "$1$IFS$2$IFS$3"
-echo "ABC"
+#
+#변수의 선언
+#
 MYSTRING=abc
 
 if [ $MYSTRING = abc ] ; then
