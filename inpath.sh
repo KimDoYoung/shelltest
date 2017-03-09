@@ -4,7 +4,7 @@ in_path()
   cmd=$1  ourpath=$2  result=1
   oldIFS=$IFS
   for directory in "$ourpath"; do
-    if [[ -x $directory/$cmd ]]; then
+    if [ -x $directory/$cmd ]; then
       result=0
       break
     fi
@@ -15,9 +15,9 @@ in_path()
 checkForCmdInPath()
 {
   var=$1
-  if [[ "$var" != "" ]]; then
-    if [[ "${var:0:1}" = "/" ]]; then
-      if [[ ! -x $var ]]; then
+  if [ "$var" != "" ]; then
+    if [ "${var:0:1}" = "/" ]; then
+      if [ ! -x $var ]; then
         return 1
       fi
     elif ! in_path $var "$PATH" ; then
@@ -25,7 +25,7 @@ checkForCmdInPath()
     fi
   fi
 }
-if [[ $# -ne 1 ]]; then
+if [ $# -ne 1 ]; then
   echo "Usage: $0 command" >&2
   exit 1
 fi
