@@ -5,7 +5,8 @@ in_path()
   oldIFS=$IFS
   for directory in "$ourpath"; do
     if [[ -x $directory/$cmd ]]; then
-      result=0;
+      result=0
+      break
     fi
   done
   IFS=$oldIFS
