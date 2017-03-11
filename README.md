@@ -8,4 +8,11 @@ bash로 리눅스에서 쉘프로그램을 작성할 때 참조하기 위해서 
 ####참고도서
 [Wicked Cool Shell Scripts](https://www.nostarch.com/wcss.htm)
 
+#### 소스 설명
+##Wicked Cool Shell Scripts
+inpath.sh
+normdate.sh
+validAlphaNum.sh
+nicenumber.sh
+
 ####참고링크
