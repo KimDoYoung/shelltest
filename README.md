@@ -9,5 +9,5 @@ bash로 리눅스에서 쉘프로그램을 작성할 때 참조하기 위해서 
 [Wicked Cool Shell Scripts](https://www.nostarch.com/wcss.htm)
 
 #### 폴더 설명
-
+Wicked Cool
 ####참고링크
