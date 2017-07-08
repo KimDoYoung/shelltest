@@ -1,6 +1,3 @@
-#
-# sass develop template 
-#
 mkdir dist src public test;
 mkdir dist/assets;
 for F in 'css' 'js' 'images' 'fonts'
@@ -28,27 +25,33 @@ git init
 currentFolderName=${PWD##*/}  
 cat > package.json <<EOL
 {
-  "name": "${currentFolderName}",
+  "name": "cssjs",
   "version": "1.0.0",
   "description": "my own css, collect css class and test",
   "main": "gulpfile.js",
   "devDependencies": {
-  "browser-sync": "^2.18.12",
-  "gulp": "^3.9.1",
-  "gulp-autoprefixer": "^3.1.0",
-  "gulp-load-plugins": "^1.1.0",
-  "gulp-sass": "^2.1.0",
-  "gulp-rename" : "^1.2.2"
-},
-"scripts": {
-  "start": "gulp",
-  "build": "gulp sass"
-},
-"license": "MIT",
-"private": true,"dependencies": {
-  "gulp-autoprefixer": "^3.1.0"
+    "browser-sync": "^2.18.12",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-load-plugins": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.1.0",
+    "gulp-uglify": "^3.0.0"
+  },
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp sass"
+  },
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "del": "^3.0.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.1"
+  }
 }
-}
+
 EOL
 npm install -g gulp;
 npm install;
@@ -60,6 +63,9 @@ cat > gulpfile.js <<EOL
 // npm install browser-sync gulp --save-dev (https://browsersync.io/docs/gulp)
 
 var gulp = require('gulp');
+var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var uglify = require('gulp-uglify');  
 var $    = require('gulp-load-plugins')();
 var browserSync = require('browser-sync').create();
 //var rename = require("gulp-rename");
@@ -83,6 +89,16 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('dist/assets/css'));
 });
 
+gulp.task('scripts', function() {
+  var jsFiles = 'src/js/**/*.js',
+      jsDest = 'dist/assets/js';
+    return gulp.src(jsFiles)
+        .pipe(concat('app.js'))
+        .pipe(gulp.dest(jsDest))
+        .pipe(rename('app.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDest));
+});
 gulp.task('default', ['sass'], function() {
   browserSync.init({
        server: "./"
@@ -91,4 +107,3 @@ gulp.task('default', ['sass'], function() {
   gulp.watch(['dist/assets/css/*.css','*.html']).on('change', browserSync.reload);
 });
 EOL
-
